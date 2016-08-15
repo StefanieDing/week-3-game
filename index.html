@@ -3,83 +3,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Saturday Cartoons - Hangman</title>
+	<link href="css/reset.css" rel="stylesheet">
+	<link href="css/style.css" rel="stylesheet">
+
 </head>
 <body>
 
-<script>
-
-	var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	var words = ['RECESS', 'ANIMANIACS', 'TRANSFORMERS', 'POKEMON', 'DOUG', 'DEXTERS LABORATORY', 'HEY ARNOLD', 'KIM POSSIBLE', 'POWERPUFF GIRLS', 'SAMURAI JACK'];
-	var lives = 12;
-	var winCounter = 0;
-	var loseCounter = 0;
-	var messages = {
-		win: 'You win!',
-		lose: 'You lose. Game over.',
-		guessed: 'You guessed that letter already! Try again.',
-		validLetter: 'Enter a letter from A - Z',
-	}
-	var isLetter = false;
-	var alreadyGuessed = false;
-	var lettersGuessed = []; 
-
-	//Press space bar(or enter) to continue and then call on function
-	function newGame(){
-		var currentWord = words[Math.floor((Math.random() * words.length))]; 
-		
-		console.log(currentWord);
-	}
-	
-
-	document.onkeyup = function(event){
-		var userGuess = String.fromCharCode(event.keyCode).toUpperCase();
-
-		//Check to see if letter, if not send message: validLetter
-		for(var i = 0; i < alphabet.length; i++){
-			if(userGuess === alphabet.charAt(i)){
-				isLetter = true;
-			}
-		}	
-
-		if(isLetter == false){
-			console.log(messages.validLetter);
-			}
-
-		//If it was guessed already send message: guessed
-		for(var i = 0; i < lettersGuessed.length; i++){
-			if(userGuess === lettersGuessed[i]){
-				alreadyGuessed = true;
-			}
-			
-			if(alreadyGuessed == true){
-			console.log(messages.guessed);
-			}
-		}
-
-		//Otherwise push into letterGuessed. Take away a life with each push
-		if(isLetter == true && alreadyGuessed == false){
-			lettersGuessed.push(userGuess);
-
-		}
-
-		//When lettersGuessed.length is 12, lose message appears
-		if(lettersGuessed.length == 12){
-			alert(messages.lose);
-			lettersGuessed.length = 0;
-			newGame();
-		}
-
-		isLetter = false;
-		alreadyGuessed = false;
-
-	}	
-
-	document.write("Guesses Left: " + lives);
-
-	
-
-
+<script type = "text/javascript" src="javascript/game.js">
 </script>
+
 
 </body>
 </html>
