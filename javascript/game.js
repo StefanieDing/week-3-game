@@ -1,5 +1,5 @@
 var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var words = ['RECESS', 'ANIMANIACS', 'TRANSFORMERS', 'POKEMON', 'DOUG', 'DEXTERS LABORATORY', 'HEY ARNOLD', 'KIM POSSIBLE', 'POWERPUFF GIRLS', 'SAMURAI JACK'];
+var words = ['RECESS', 'ANIMANIACS', 'TRANSFORMERS', 'POKEMON', 'DOUG', 'DEXTERS LABORATORY', 'HEY ARNOLD', 'KIM POSSIBLE', 'POWERPUFF GIRLS', 'SAMURAI JACK', 'LOONEY TUNES', 'SCOOBY DOO', 'BATMAN', 'CATDOG', 'PEPPER ANN', 'SUPERMAN', 'CARE BEARS', 'MY LITTLE PONY', 'DUCKTAILS', 'ROCKOS MODERN LIFE', 'RUGRATS'];
 var lives = 12;
 var winCounter = 0;
 var loseCounter = 0;
@@ -16,11 +16,12 @@ var guesses = 0;
 var currentWord;
 var hiddenWord = [];
 var rightLetter = false;
-var winnerWinner = false;
-
+var winnerWinner = true;
+var wordInt;
 
 function newGame(){
-	currentWord = words[Math.floor((Math.random() * words.length))]; 
+	wordInt= Math.floor((Math.random() * words.length));
+	currentWord = words[wordInt]; 
 	console.log(currentWord);
 
 	if (hiddenWord.length !== currentWord.length){
@@ -29,13 +30,15 @@ function newGame(){
 
 	//replace characters with blanks
 	for (var i = 0; i < currentWord.length; i++){
-			if(currentWord[i] === " "){
-			hiddenWord[i] = "  ";
-			}
-			else{
-			hiddenWord[i] = (" _ ");
-			}
+		if(currentWord[i] === " "){
+		hiddenWord[i] = "  ";
+		}
+		else{
+		hiddenWord[i] = (" _ ");
+		}
 	}
+
+	$('#hiddenWord').html(hiddenWord);
 }
 
 	//Records keyboard input
@@ -56,7 +59,7 @@ document.onkeyup = function(event){
 	}	
 
 	if(isLetter == false && enter != 13){
-		console.log(messages.validLetter);
+		$('#messages').html(messages.validLetter);
 	}
 
 	//If letter was guessed already send message: guessed
@@ -74,7 +77,7 @@ document.onkeyup = function(event){
 	}
 
 	if(alreadyGuessed == true){
-			console.log(messages.guessed);
+			$('#messages').html(messages.guessed);
 		}
 
 	//Checks for letter match and inserts into hiddenWord array
@@ -88,21 +91,27 @@ document.onkeyup = function(event){
 	//Pushes letters guess into an array and takes away a life for wrong letter. 
 	if(isLetter == true && alreadyGuessed == false && rightLetter == false){
 		lettersGuessed.push(userGuess);
-		lives =  lives - 1;
+		lives--;
+		$('#lives').html(lives);
 	}
+	$('#lettersGuessed').html(lettersGuessed);
+	$('#hiddenWord').html(hiddenWord);
 
 	//When out of lives - user loses and counter goes up
 	if(lettersGuessed.length == 12){
-		console.log(messages.lose);
+		$('#messages').html(messages.lose);
 		lettersGuessed = [];
-		loseCounter = loseCounter + 1;
+		$('#lettersGuessed').html(lettersGuessed);
+		loseCounter++;
+		$('#loseCounter').html(loseCounter);
+		lives = 12;
 		newGame();
 	}
+
 	//Resets booleans between keystrokes.
 	rightLetter = false;
 	isLetter = false;
 	alreadyGuessed = false;
-	
 
 	//Asks if the user has won
 	if(enter != 13){
@@ -113,21 +122,22 @@ document.onkeyup = function(event){
 function win(){
 
 	for(var i = 0; i < currentWord.length; i++){
-		if (hiddenWord[i] != " _ "){
-			winnerWinner = true;
-		}
-		else{
+		if (hiddenWord[i] == " _ "){
 			winnerWinner = false;
 		}
 	}
 
 	if (winnerWinner == true){
-		console.log(messages.win);
-		winCounter = winCounter + 1;
+		$('#messages').html(messages.win);
+		winCounter++;
+		$('#winCounter').html(winCounter);
+		lettersGuessed = [];
+		$('#lettersGuessed').html(lettersGuessed);
 		lives = 12;
+		$('#lives').html(lives);
 		newGame();
 	}
-	
+	winnerWinner = true;
 }
 
 
