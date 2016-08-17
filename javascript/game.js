@@ -138,7 +138,7 @@ function win(){
 			$('#messages').html(messages.win);
 
 //plays music after you win to the corresponding word *WORKING
-		for(var i = 0; i < currentWord.length; i++){
+		for(var i = 0; i < playlist.length; i++){
 		 	if(wordInt === i){
 		 		audio.src= dir+playlist[i]+ext;
 		 		audio.play();
