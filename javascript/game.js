@@ -23,15 +23,11 @@ var dir = 'music/';
 var playlist = ['Recess','Animaniacs','Transformers','Pokemon','Doug','DexsLab','Hey-Arnold','KP','PPG','Samurai-Jack','LooneyTunes','ScoobyDoo','Batman','CatDog','PepperAnn','Superman','CareBears','MLP','DuckTales','Talespin','RockoModLife','Rugrats','AngryBeavers'];
 var ext = '.mp3';
 var audio = new Audio();
-var test = new Audio();
-test.src = 'music/AngryBeavers.mp3'
 
 function newGame(){
 	wordInt= Math.floor((Math.random() * words.length));
 	currentWord = words[wordInt]; 
 	console.log(currentWord);
-
-	test.play();
 
 	if (hiddenWord.length !== currentWord.length){
 		hiddenWord = [];
