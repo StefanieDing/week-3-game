@@ -38,6 +38,7 @@ header{
 	color: #323033;
 }
 
+/*Media Screens*/
 @media screen and (max-width:980px){
 	header{
 		padding: 20px;
@@ -45,10 +46,12 @@ header{
 		margin-bottom: 20px;
 
 	}
+
 	#header-img{
 		margin-left: 10px;
 		margin-right: 100px;
 	}
+
 	.container{
 		padding: 45px;
 	}
@@ -69,12 +72,15 @@ header{
 		margin-right: 50px;
 		margin-bottom:20px;
 	}
+
 	h1{
 		font-size: 30px;
 	}
+
 	header{
 		margin-top: 50px;
 	}
+
 	body{
 		font-size: 25px;
 	}

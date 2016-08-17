@@ -1,5 +1,5 @@
 var alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var words = ['RECESS', 'ANIMANIACS', 'TRANSFORMERS', 'POKEMON', 'DOUG', 'DEXTERS LABORATORY', 'HEY ARNOLD', 'KIM POSSIBLE', 'POWERPUFF GIRLS', 'SAMURAI JACK', 'LOONEY TUNES', 'SCOOBY DOO', 'BATMAN', 'CATDOG', 'PEPPER ANN', 'SUPERMAN', 'CARE BEARS', 'MY LITTLE PONY', 'DUCKTAILS', 'ROCKOS MODERN LIFE', 'RUGRATS'];
+var words = ['RECESS', 'ANIMANIACS', 'TRANSFORMERS', 'POKEMON', 'DOUG', 'DEXTERS LABORATORY', 'HEY ARNOLD', 'KIM POSSIBLE', 'POWERPUFF GIRLS', 'SAMURAI JACK', 'LOONEY TUNES', 'SCOOBY DOO', 'BATMAN', 'CATDOG', 'PEPPER ANN', 'SUPERMAN', 'CARE BEARS', 'MY LITTLE PONY', 'DUCKTALES', 'TALESPIN', 'ROCKOS MODERN LIFE', 'RUGRATS', 'THE ANGRY BEAVERS'];
 var lives = 12;
 var winCounter = 0;
 var loseCounter = 0;
@@ -19,15 +19,14 @@ var rightLetter = false;
 var winnerWinner = true;
 var wordInt;
 //Music
-var dir = "images/";
-var playlist = ['Recess', 'Animaniacs', 'Transformers', 'Pokemon', 'Doug', 'DexsLab', 'Hey-Arnold', 'KP', 'PPG', 'Samurai-Jack'];
-var ext = ".mp3";
-var audio = new Audio()
+var dir = 'images/';
+var playlist = ['Recess','Animaniacs','Transformers','Pokemon','Doug','DexsLab','Hey-Arnold','KP','PPG','Samurai-Jack','LooneyTunes','ScoobyDoo','Batman','CatDog','PepperAnn','Superman','CareBears','MLP','Ducktales','Talespin','RockoModLife','Rugrats','AngryBeavers'];
+var ext = '.mp3';
+var audio = new Audio();
 
 function newGame(){
 	wordInt= Math.floor((Math.random() * words.length));
 	currentWord = words[wordInt]; 
-	//audio.stop();
 	console.log(currentWord);
 
 	if (hiddenWord.length !== currentWord.length){
@@ -52,6 +51,7 @@ document.onkeyup = function(event){
 	var userGuess = String.fromCharCode(event.keyCode).toUpperCase();
 	var enter = (event.keyCode);
 
+	audio.pause();
 	//Press Enter to start Game
 	if (enter == 13){
 		newGame();
@@ -136,6 +136,15 @@ function win(){
 
 	if (winnerWinner == true){
 			$('#messages').html(messages.win);
+
+		//plays music after you win to the corresponding word *WORKING
+		for(var i = 0; i < currentWord.length; i++){
+		 	if(wordInt == i){
+		 		audio.src= dir+playlist[i]+ext;
+		 		audio.play();
+		 	}
+		}
+		
 		winCounter++;
 			$('#winCounter').html(winCounter);
 		lettersGuessed = [];
@@ -143,16 +152,9 @@ function win(){
 		lives = 12;
 			$('#lives').html(lives);
 
-		//plays music after you win to the corresponding word *WORKING
-		 for(var i = 0; i < currentWord.length; i++){
-		 	if(wordInt == i){
-		 		audio.src= dir+playlist[i]+ext;
-		 		audio.play();
-		 	}
-			
-		}
 		newGame();
 	}
+
 	winnerWinner = true;
 }
 
