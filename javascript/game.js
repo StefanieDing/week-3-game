@@ -18,10 +18,16 @@ var hiddenWord = [];
 var rightLetter = false;
 var winnerWinner = true;
 var wordInt;
+//Music
+var dir = "images/";
+var playlist = ['Recess', 'Animaniacs', 'Transformers', 'Pokemon', 'Doug', 'DexsLab', 'Hey-Arnold', 'KP', 'PPG', 'Samurai-Jack'];
+var ext = ".mp3";
+var audio = new Audio()
 
 function newGame(){
 	wordInt= Math.floor((Math.random() * words.length));
 	currentWord = words[wordInt]; 
+	//audio.stop();
 	console.log(currentWord);
 
 	if (hiddenWord.length !== currentWord.length){
@@ -94,16 +100,17 @@ document.onkeyup = function(event){
 		lives--;
 		$('#lives').html(lives);
 	}
+
 	$('#lettersGuessed').html(lettersGuessed);
 	$('#hiddenWord').html(hiddenWord);
 
 	//When out of lives - user loses and counter goes up
 	if(lettersGuessed.length == 12){
-		$('#messages').html(messages.lose);
+			$('#messages').html(messages.lose);
 		lettersGuessed = [];
-		$('#lettersGuessed').html(lettersGuessed);
+			$('#lettersGuessed').html(lettersGuessed);
 		loseCounter++;
-		$('#loseCounter').html(loseCounter);
+			$('#loseCounter').html(loseCounter);
 		lives = 12;
 		newGame();
 	}
@@ -128,13 +135,22 @@ function win(){
 	}
 
 	if (winnerWinner == true){
-		$('#messages').html(messages.win);
+			$('#messages').html(messages.win);
 		winCounter++;
-		$('#winCounter').html(winCounter);
+			$('#winCounter').html(winCounter);
 		lettersGuessed = [];
-		$('#lettersGuessed').html(lettersGuessed);
+			$('#lettersGuessed').html(lettersGuessed);
 		lives = 12;
-		$('#lives').html(lives);
+			$('#lives').html(lives);
+
+		//plays music after you win to the corresponding word *WORKING
+		 for(var i = 0; i < currentWord.length; i++){
+		 	if(wordInt == i){
+		 		audio.src= dir+playlist[i]+ext;
+		 		audio.play();
+		 	}
+			
+		}
 		newGame();
 	}
 	winnerWinner = true;
