@@ -20,7 +20,7 @@ Tracks letters guessed and lets the user know if they've already guessed a lette
 - jQuery
 
 ## Getting Started 
-https://git.heroku.com/cartoon-hangman
+http://cartoon-hangman.herokuapp.com/
 
 ### Prerequisities
 
