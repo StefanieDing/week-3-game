@@ -22,7 +22,7 @@ Tracks letters guessed and lets the user know if they've already guessed a lette
 ## Getting Started 
 http://cartoon-hangman.herokuapp.com/
 
-### Prerequisities
+### Prerequisites
 
 ```
 - Bootstrap: visit http://getbootstrap.com/ and link in html
